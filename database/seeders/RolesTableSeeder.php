@@ -15,6 +15,7 @@ class RolesTableSeeder extends Seeder
             ['id' => 1, 'name' => 'admin', 'display_name' => 'Administrator', 'created_at' => now(), 'updated_at' => now()],
             ['id' => 2, 'name' => 'faculty', 'display_name' => 'Faculty / Instructor', 'created_at' => now(), 'updated_at' => now()],
             ['id' => 3, 'name' => 'student', 'display_name' => 'Student', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'name' => 'coordinator', 'display_name' => 'Student Coordinator', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

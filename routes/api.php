@@ -17,6 +17,11 @@ use App\Http\Controllers\LiveClassController;
 use App\Http\Controllers\StudyMaterialController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AssignmentSubmissionController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\CoordinatorController;
+use App\Http\Controllers\SettingController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -57,4 +62,56 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/faculty/assignments/pending', [AssignmentSubmissionController::class, 'pendingReviews']);
     Route::post('/faculty/assignments/{id}/grade', [AssignmentSubmissionController::class, 'grade']);
+
+    // Admin & Coordinator CRUD routes
+    Route::post('/courses', [CourseController::class, 'store']);
+    Route::put('/courses/{id}', [CourseController::class, 'update']);
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
+
+    Route::get('/modules', [CourseController::class, 'indexModules']);
+    Route::post('/modules', [CourseController::class, 'storeModule']);
+    Route::put('/modules/{id}', [CourseController::class, 'updateModule']);
+    Route::delete('/modules/{id}', [CourseController::class, 'destroyModule']);
+
+    Route::get('/batches', [BatchController::class, 'index']);
+    Route::post('/batches', [BatchController::class, 'store']);
+    Route::put('/batches/{id}', [BatchController::class, 'update']);
+    Route::delete('/batches/{id}', [BatchController::class, 'destroy']);
+    Route::post('/batches/{id}/assign-student', [BatchController::class, 'assignStudent']);
+    Route::post('/batches/{id}/remove-student', [BatchController::class, 'removeStudent']);
+    Route::post('/batches/{id}/transfer-student', [BatchController::class, 'transferStudent']);
+    Route::post('/batches/{id}/assign-faculty', [BatchController::class, 'assignFaculty']);
+
+    Route::get('/students', [StudentController::class, 'index']);
+    Route::post('/students', [StudentController::class, 'store']);
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+    Route::post('/students/{id}/admission-status', [StudentController::class, 'updateAdmissionStatus']);
+
+    Route::get('/faculty', [FacultyController::class, 'index']);
+    Route::post('/faculty', [FacultyController::class, 'store']);
+
+    Route::get('/counseling', [\App\Http\Controllers\CounselingController::class, 'index']);
+    Route::post('/counseling', [\App\Http\Controllers\CounselingController::class, 'store']);
+    Route::put('/counseling/{id}', [\App\Http\Controllers\CounselingController::class, 'update']);
+    Route::delete('/counseling/{id}', [\App\Http\Controllers\CounselingController::class, 'destroy']);
+
+    Route::get('/attendances', [\App\Http\Controllers\AttendanceController::class, 'index']);
+    Route::put('/attendances/{id}', [\App\Http\Controllers\AttendanceController::class, 'update']);
+
+    Route::get('/reports', [\App\Http\Controllers\ReportController::class, 'index']);
+    Route::put('/faculty/{id}', [FacultyController::class, 'update']);
+
+    Route::get('/inactive-students', [StudentController::class, 'inactiveIndex']);
+    Route::post('/inactive-students/follow-up', [StudentController::class, 'followUp']);
+
+    Route::post('/jobs', [JobPostingController::class, 'store']);
+    Route::get('/packages', [JobPostingController::class, 'packages']);
+    Route::post('/packages', [JobPostingController::class, 'storePackage']);
+    Route::put('/packages/{id}/status', [JobPostingController::class, 'updatePackageStatus']);
+
+    Route::get('/settings', [SettingController::class, 'index']);
+    Route::post('/settings', [SettingController::class, 'update']);
+
+    Route::get('/coordinator/dashboard', [CoordinatorController::class, 'dashboard']);
 });

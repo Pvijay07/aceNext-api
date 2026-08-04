@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\CourseModule;
 use App\Models\CourseLesson;
+use App\Models\Package;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -61,5 +63,48 @@ class DatabaseSeeder extends Seeder
             'duration' => 300,
             'order_no' => 2,
         ]);
+
+        // Seed Add-on Packages
+        Package::create([
+            'name' => 'Job Placement Guarantee',
+            'price' => 25000,
+            'price_display' => '₹25,000',
+            'users' => 145,
+            'active' => true,
+        ]);
+
+        Package::create([
+            'name' => '1-on-1 Mentorship (Monthly)',
+            'price' => 5000,
+            'price_display' => '₹5,000/mo',
+            'users' => 89,
+            'active' => true,
+        ]);
+
+        Package::create([
+            'name' => 'Resume & Portfolio Review',
+            'price' => 2500,
+            'price_display' => '₹2,500',
+            'users' => 210,
+            'active' => true,
+        ]);
+
+        Package::create([
+            'name' => 'Premium Mock Interviews',
+            'price' => 4000,
+            'price_display' => '₹4,000',
+            'users' => 0,
+            'active' => false,
+        ]);
+
+        // Seed settings
+        Setting::create(['key' => 'platform_name', 'value' => 'AceNext AI']);
+        Setting::create(['key' => 'contact_email', 'value' => 'support@acenext.com']);
+        Setting::create(['key' => 'support_phone', 'value' => '+91 98765 43210']);
+        Setting::create(['key' => 'maintenance_mode', 'value' => 'false']);
+        Setting::create(['key' => 'enable_ai_tutor', 'value' => 'true']);
+        Setting::create(['key' => 'enable_gamification', 'value' => 'true']);
+        Setting::create(['key' => 'enable_zoom_integration', 'value' => 'false']);
+        Setting::create(['key' => 'allow_self_registration', 'value' => 'true']);
     }
 }
