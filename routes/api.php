@@ -114,4 +114,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/settings', [SettingController::class, 'update']);
 
     Route::get('/coordinator/dashboard', [CoordinatorController::class, 'dashboard']);
+
+    // AI & Career Tool Endpoints
+    Route::post('/assessment/skill-eval', [AssessmentController::class, 'skillEval']);
+    Route::post('/linkedin/optimize', [UserProfileController::class, 'optimizeLinkedIn']);
+
+    // Corporate Hiring & Company Portal Endpoints
+    Route::get('/company/candidates', [\App\Http\Controllers\CompanyController::class, 'candidates']);
+    Route::post('/company/schedule-interview', [\App\Http\Controllers\CompanyController::class, 'scheduleInterview']);
+    Route::post('/company/offer-letter', [\App\Http\Controllers\CompanyController::class, 'offerLetter']);
 });
