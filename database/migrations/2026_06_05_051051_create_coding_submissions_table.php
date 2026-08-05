@@ -14,12 +14,17 @@ return new class extends Migration
         Schema::create('coding_submissions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('question_id')->constrained()->cascadeOnDelete();
+            $table->string('challenge_id')->nullable();
+            $table->string('project_id')->nullable();
+            $table->unsignedBigInteger('question_id')->nullable();
             $table->string('language');
             $table->text('code');
             $table->enum('status', ['pending', 'passed', 'failed', 'error'])->default('pending');
             $table->decimal('runtime', 8, 4)->nullable();
             $table->integer('memory')->nullable();
+            $table->integer('runtime_ms')->nullable();
+            $table->integer('memory_kb')->nullable();
+            $table->text('error_log')->nullable();
             $table->timestamps();
         });
     }

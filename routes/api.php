@@ -118,6 +118,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // AI & Career Tool Endpoints
     Route::post('/assessment/skill-eval', [AssessmentController::class, 'skillEval']);
     Route::post('/linkedin/optimize', [UserProfileController::class, 'optimizeLinkedIn']);
+    Route::post('/planner/generate', [\App\Http\Controllers\SmartPlannerController::class, 'generate']);
+    Route::post('/code/evaluate', [CodingArenaController::class, 'submit']);
+    Route::post('/grader/code', [CodingArenaController::class, 'submit']);
 
     // Corporate Hiring & Company Portal Endpoints
     Route::get('/company/candidates', [\App\Http\Controllers\CompanyController::class, 'candidates']);
